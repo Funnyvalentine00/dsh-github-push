@@ -33,6 +33,10 @@ dev_github_push
   - README 太简短 → 自动替换为更完整的版本
   - README 已有内容 → 自动补齐缺失的常用章节（安装 / 使用 / 项目结构 / License）
   - 可用 `readmeMode=keep` 跳过，或 `readmeMode=rewrite` 强制重写
+- ✅ **自动设置 GitHub About topics**：
+  - 根据项目元数据自动推断 topic（如 `dsh`、`dsh-plugin`、`deepseek-harness`、项目名等）
+  - 支持通过 `topics` 参数追加自定义 topic
+  - 优先用 `gh repo edit`，没有 gh 时用 GitHub REST API（需要 `GITHUB_TOKEN` / `GH_TOKEN`）
 
 ## 工具说明
 
@@ -46,6 +50,7 @@ dev_github_push
 | `branch` | string | 否 | 分支，默认 `main` |
 | `visibility` | string | 否 | 新建仓库可见性：`public` / `private`，默认 `public` |
 | `readmeMode` | string | 否 | README 处理：`auto` / `keep` / `rewrite`，默认 `auto` |
+| `topics` | string | 否 | 额外 GitHub topics，逗号分隔，例如 `dsh,plugin,automation` |
 
 ## 使用示例
 
@@ -74,6 +79,24 @@ dev_github_push
   - 使用
   - License
 
+## Topics 自动推断规则
+
+自动收集以下来源（去重、最多 20 个）：
+
+- `package.json` 的 `keywords`
+- 如果是 DSH 插件：`dsh`、`dsh-plugin`、`deepseek-harness`
+- 项目目录名
+- 调用时传入的 `topics` 参数（逗号分隔）
+
+设置方式：
+
+1. 优先使用 `gh repo edit <repo> --add-topic <topic>`
+2. 如果没有 `gh`，则使用 GitHub REST API：
+   ```
+   PUT /repos/{owner}/{repo}/topics
+   ```
+   需要环境变量 `GITHUB_TOKEN` 或 `GH_TOKEN`
+
 ## 安装
 
 ### 方式 A：直接注入（当前环境）
@@ -101,6 +124,7 @@ dev_inject_plugin {"dir": "<本目录>"}
 - 如果仓库不存在且本机没有 `gh` CLI，工具会提示你先在 GitHub 手动建仓库。
 - 自动生成的 README 是基于项目元数据的模板；需要更“智能”的文案时，可以让 AI 在推送前再人工/LLM 完善。
 - 已存在的 README 不会被覆盖，除非它太短或你显式指定 `readmeMode=rewrite`。
+- 自动设置 topics 需要 `gh` CLI 已登录，或设置 `GITHUB_TOKEN` / `GH_TOKEN`；否则会跳过并提示。
 
 ## License
 
