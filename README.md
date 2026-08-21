@@ -101,14 +101,28 @@ dev_github_push
 
 ## 安装
 
-### 方式 A：直接注入（当前环境）
+### 方式 A：DSH CLI 安装 / 卸载
+
+安装：
+
+```bash
+dsh plugin --profile web add @dsh-external/dsh-github-push
+```
+
+卸载：
+
+```bash
+dsh plugin --profile web remove @dsh-external/dsh-github-push
+```
+
+### 方式 B：直接注入（当前环境）
 
 ```bash
 # 在 DSH 内对 AI 说：
 dev_inject_plugin {"dir": "E:/dsh插件/router/dsh-github-push"}
 ```
 
-### 方式 B：从源码构建
+### 方式 C：从源码构建
 
 ```bash
 DSH_CHECKOUT=<checkout> bash scripts/build.sh
