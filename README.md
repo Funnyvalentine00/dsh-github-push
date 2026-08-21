@@ -30,8 +30,7 @@ dev_github_push
 - ✅ 可选通过 `gh` CLI 自动创建不存在的仓库
 - ✅ **自动处理 README**：
   - 没有 README → 自动生成一份较详细的 README
-  - README 太简短 → 自动替换为更完整的版本
-  - README 已有内容 → 自动补齐缺失的常用章节（安装 / 使用 / 项目结构 / License）
+  - README 已有内容 → 只自动补齐缺失的常用章节，不重写
   - 可用 `readmeMode=keep` 跳过，或 `readmeMode=rewrite` 强制重写
   - 如果是 DSH 插件，会自动加入 DSH CLI 安装/卸载命令
 - ✅ **自动设置 GitHub About topics**：
@@ -139,7 +138,7 @@ dev_inject_plugin {"dir": "<本目录>"}
 
 - 如果仓库不存在且本机没有 `gh` CLI，工具会提示你先在 GitHub 手动建仓库。
 - 自动生成的 README 是基于项目元数据的模板；需要更“智能”的文案时，可以让 AI 在推送前再人工/LLM 完善。
-- 已存在的 README 不会被覆盖，除非它太短或你显式指定 `readmeMode=rewrite`。
+- 已存在的 README 不会被覆盖，只会补齐缺失章节；除非你显式指定 `readmeMode=rewrite`。
 - 自动设置 topics 需要 `gh` CLI 已登录，或设置 `GITHUB_TOKEN` / `GH_TOKEN`；否则会跳过并提示。
 
 ## License
