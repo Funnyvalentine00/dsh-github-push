@@ -33,6 +33,7 @@ dev_github_push
   - README 太简短 → 自动替换为更完整的版本
   - README 已有内容 → 自动补齐缺失的常用章节（安装 / 使用 / 项目结构 / License）
   - 可用 `readmeMode=keep` 跳过，或 `readmeMode=rewrite` 强制重写
+  - 如果是 DSH 插件，会自动加入 DSH CLI 安装/卸载命令
 - ✅ **自动设置 GitHub About topics**：
   - 根据项目元数据自动推断 topic（如 `dsh`、`dsh-plugin`、`deepseek-harness`、项目名等）
   - 支持通过 `topics` 参数追加自定义 topic
@@ -78,6 +79,7 @@ dev_github_push
   - 安装
   - 使用
   - License
+  - 如果是 DSH 插件：DSH 安装 / 卸载（`dsh plugin --profile web add <包名>` / `dsh plugin --profile web remove <包名>`）
 
 ## Topics 自动推断规则
 
