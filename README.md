@@ -37,6 +37,7 @@ dev_github_push
   - 根据项目元数据自动推断 topic（如 `dsh`、`dsh-plugin`、`deepseek-harness`、项目名等）
   - 支持通过 `topics` 参数追加自定义 topic
   - 优先用 `gh repo edit`，没有 gh 时用 GitHub REST API（需要 `GITHUB_TOKEN` / `GH_TOKEN`）
+- ✅ **安全演练**：支持 `dryRun`，只打印计划，不实际改动任何文件/仓库
 
 ## 工具说明
 
@@ -51,6 +52,8 @@ dev_github_push
 | `visibility` | string | 否 | 新建仓库可见性：`public` / `private`，默认 `public` |
 | `readmeMode` | string | 否 | README 处理：`auto` / `keep` / `rewrite`，默认 `auto` |
 | `topics` | string | 否 | 额外 GitHub topics，逗号分隔，例如 `dsh,plugin,automation` |
+| `dryRun` | boolean | 否 | 只打印将要执行的操作，不实际改动 |
+| `skipTopics` | boolean | 否 | 跳过自动设置 GitHub About topics |
 
 ## 使用示例
 
@@ -67,6 +70,14 @@ dev_github_push
 或直接对 AI 说：
 
 > “上传 `E:/my-project` 到 https://github.com/Funnyvalentine00/my-project，private”
+
+## 测试
+
+```bash
+npm test
+```
+
+覆盖：URL 规范化、topic 推导、DSH CLI 安装/卸载命令、README 生成。
 
 ## README 自动生成规则
 
