@@ -1,0 +1,5 @@
+# dsh-github-push bundle 层：通过官方 dsh plugin add 装配。
+- insert:
+    - id: dsh-github-push
+      name: '@dsh-external/dsh-github-push'
+      config: {}
