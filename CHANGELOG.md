@@ -18,3 +18,6 @@ All notable changes to `@dsh-external/dsh-github-push` are documented in this fi
 
 ### Fixed
 - Added the official `dsh.bundle` manifest and `cordis.patch.yml` so the plugin can be installed via `dsh plugin add`.
+- `cordis.patch.yml` is now listed in `package.json`'s `files` array. It was previously excluded from published/packed
+  installs (npm and `git+https` installs honor `files`), so a fresh install shipped no bundle patch and the declared
+  `dsh.bundle.patch` pointed at a missing file, breaking profile startup.
